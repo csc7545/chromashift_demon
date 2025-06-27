@@ -52,7 +52,7 @@ class BulletComponent extends SpriteAnimationComponent
   ) {
     super.onCollisionStart(intersectionPoints, other);
     if (other is EnemyComponent && !other.isDead) {
-      other.takeDamage();
+      other.takeDamage(type);
       removeFromParent();
     }
   }
