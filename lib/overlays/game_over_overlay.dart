@@ -46,7 +46,7 @@ class GameOverOverlay extends StatelessWidget {
               'SCORE: $score',
               style: GoogleFonts.pressStart2p(fontSize: 20, color: Colors.red),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 64),
             ElevatedButton(
               onPressed: () {
                 game.resetGame();
