@@ -15,6 +15,11 @@ class PlayerComponent extends SpriteAnimationComponent
   PlayerStateType currentState = PlayerStateType.idle;
   late Map<PlayerStateType, SpriteAnimation> animations;
 
+  bool isDead = false;
+  late final HealthBarComponent healthBar;
+  int maxHealth = 3;
+  int currentHealth = 3;
+
   PlayerComponent();
 
   @override
@@ -25,9 +30,9 @@ class PlayerComponent extends SpriteAnimationComponent
 
     add(RectangleHitbox());
 
-    final healthBar = HealthBarComponent(
-      maxHealth: 3,
-      currentHealth: 1,
+    healthBar = HealthBarComponent(
+      maxHealth: maxHealth,
+      currentHealth: currentHealth,
       heartSize: Vector2(16, 16),
       heartsPerRow: 3,
       position: Vector2(0, -16), // 머리 위에 표시
@@ -144,6 +149,16 @@ class PlayerComponent extends SpriteAnimationComponent
           loop: false,
         ),
       ),
+      PlayerStateType.hurt: SpriteAnimation.fromFrameData(
+        image,
+        SpriteAnimationData.sequenced(
+          amount: 3,
+          stepTime: 0.05,
+          textureSize: Vector2(24, 24),
+          texturePosition: Vector2(24 * 14, 0),
+          loop: false,
+        ),
+      ),
     };
   }
 
@@ -160,5 +175,30 @@ class PlayerComponent extends SpriteAnimationComponent
     );
 
     game.world.add(bullet);
+  }
+
+  void takeDamage() {
+    if (currentHealth <= 0) return;
+
+    currentHealth--;
+    healthBar.updateHealth(currentHealth);
+
+    if (currentHealth <= 0) {
+      die();
+      return;
+    }
+
+    animation = animations[PlayerStateType.hurt];
+    animationTicker?.onComplete = () {
+      animation = animations[PlayerStateType.idle];
+    };
+  }
+
+  void die() {
+    if (isDead) return;
+
+    isDead = true;
+    removeFromParent();
+    // TODO: 게임 오버 처리 (UI 표시나 상태 전환 등)
   }
 }

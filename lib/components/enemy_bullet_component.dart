@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
+import 'package:kill_the_bloom/components/player_component.dart';
 import 'package:kill_the_bloom/kill_the_bloom_game.dart';
 
 class EnemyBulletComponent extends SpriteComponent
@@ -35,5 +36,17 @@ class EnemyBulletComponent extends SpriteComponent
 
     // 방향에 따른 회전
     angle = atan2(direction.y, direction.x);
+  }
+
+  @override
+  void onCollisionStart(
+    Set<Vector2> intersectionPoints,
+    PositionComponent other,
+  ) {
+    super.onCollisionStart(intersectionPoints, other);
+    if (other is PlayerComponent && !other.isDead) {
+      other.takeDamage();
+      removeFromParent();
+    }
   }
 }

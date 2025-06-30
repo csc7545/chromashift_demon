@@ -1,1 +1,1 @@
-enum PlayerStateType { idle, move, attack }
+enum PlayerStateType { idle, move, attack, hurt }

@@ -1,6 +1,5 @@
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
-import 'package:flutter/material.dart';
 import 'package:kill_the_bloom/kill_the_bloom_game.dart';
 
 class HealthBarComponent extends PositionComponent

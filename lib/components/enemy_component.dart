@@ -19,15 +19,20 @@ class EnemyComponent extends SpriteAnimationComponent
   int lastFrameIndex = -1;
   ElementType? currentColor;
 
+  // Heath
+  late final HealthBarComponent healthBar;
+  int maxHealth = 50;
+  int currentHealth = 50;
+
   EnemyComponent({super.position}) {
     size = Vector2(243, 213);
   }
 
   @override
   Future<void> onLoad() async {
-    final healthBar = HealthBarComponent(
-      maxHealth: 50,
-      currentHealth: 50,
+    healthBar = HealthBarComponent(
+      maxHealth: maxHealth,
+      currentHealth: currentHealth,
       heartSize: Vector2(16, 16),
       heartsPerRow: 10,
       position: Vector2(16, (-16 * 6)), // 머리 위에 표시
@@ -186,6 +191,14 @@ class EnemyComponent extends SpriteAnimationComponent
 
     // 발사체 색상과 현재 약점 색상이 일치하지 않으면 무효
     if (currentColor != bulletColor) return;
+
+    currentHealth--;
+    healthBar.updateHealth(currentHealth);
+
+    if (currentHealth <= 0) {
+      die();
+      return;
+    }
 
     animation = animations[EnemyStateType.hurt];
     animationTicker?.onComplete = () {
