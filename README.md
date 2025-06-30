@@ -6,7 +6,11 @@ _A dark pixel-style elemental survival game built with Flutter + Flame_
 
 ## 🔗 Play Now
 
-👉 [Play chromashift_demon on Firebase](https://chromashift-demon.firebaseapp.com/)
+<p align="center">
+  <a href="https://chromashift-demon.firebaseapp.com/" target="_blank">
+    <img src="https://img.shields.io/badge/Play%20Now-chromashift__demon-red?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Play chromashift_demon" />
+  </a>
+</p>
 
 ---
 
