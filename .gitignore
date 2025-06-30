@@ -46,3 +46,22 @@ app.*.map.json
 
 # FVM Version Cache
 .fvm/
+
+# Firebase Hosting & CLI
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+.firebaserc
+
+# Firebase Config (optional, if secrets are present)
+firebase.json
+
+# Firebase Emulators (optional)
+.firestore/
+.storage/
+
+# Firebase Functions (if using)
+functions/node_modules/
+functions/lib/
+functions/.env
+functions/.env.*
