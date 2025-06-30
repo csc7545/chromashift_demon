@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:kill_the_bloom/components/element_changer_component.dart';
 import 'package:kill_the_bloom/components/enemy_component.dart';
 import 'package:kill_the_bloom/components/player_component.dart';
+import 'package:kill_the_bloom/components/score_hud_component.dart';
 import 'package:kill_the_bloom/components/world_border_component.dart';
 import 'package:kill_the_bloom/element_type.dart';
 
@@ -16,6 +17,7 @@ class KillTheBloomGame extends FlameGame
   late final PlayerComponent player;
   late final EnemyComponent enemy;
   late final WorldBorderComponent worldBorder;
+  late final ScoreHudComponent scoreHud;
 
   @override
   bool debugMode = true;
@@ -42,11 +44,13 @@ class KillTheBloomGame extends FlameGame
           ..position = Vector2(size.x / 2 + 300, size.y / 2); // 화면 오른쪽에 위치
 
     worldBorder = WorldBorderComponent(size: Vector2(1280, 620));
+    scoreHud = ScoreHudComponent();
 
     addAll([camera, world]);
     world.add(player);
     world.add(enemy);
     world.add(worldBorder);
+    world.add(scoreHud);
 
     camera.viewfinder.anchor = Anchor.topLeft;
     // camera.follow(player);
@@ -67,14 +71,15 @@ class KillTheBloomGame extends FlameGame
     final randomType = available[random.nextInt(available.length)];
 
     final position = Vector2(
-      random.nextDouble() * 640,
-      random.nextDouble() * 620,
+      random.nextDouble() * 700,
+      random.nextDouble() * 500,
     );
 
     final changer = ElementChangerComponent(
       type: randomType,
       position: position,
       onCollected: () {
+        scoreHud.increaseScore(100);
         spawnedTypes.remove(randomType);
         spawnRandomElementChanger();
       },
