@@ -255,6 +255,7 @@ class EnemyComponent extends SpriteAnimationComponent
     animation = animations[EnemyStateType.death];
     animationTicker?.onComplete = () {
       removeFromParent();
+      game.scoreHud?.increaseScore(1000);
       game.endGame(victory: true);
     };
   }
