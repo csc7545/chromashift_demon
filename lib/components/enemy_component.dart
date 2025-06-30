@@ -103,18 +103,22 @@ class EnemyComponent extends SpriteAnimationComponent
     currentState = EnemyStateType.active;
     currentColor =
         ElementType.values[Random().nextInt(ElementType.values.length)];
+    // 랜덤 지속 시간 (5~10초)
+    final duration = Random().nextInt(5) + 5;
 
     children.whereType<ColorEffect>().forEach(remove);
     add(
       ColorEffect(
         _getColorFromElement(currentColor!),
-        EffectController(duration: 0.5, reverseDuration: 0.5, infinite: true),
+        EffectController(
+          duration: duration / 20,
+          reverseDuration: duration / 20,
+          infinite: true,
+        ),
         opacityTo: 0.8,
       ),
     );
 
-    // 랜덤 지속 시간 (5~10초)
-    final duration = Random().nextInt(5) + 5;
     add(TimerComponent(period: duration.toDouble(), onTick: _startIdlePhase));
   }
 
