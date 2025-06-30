@@ -16,7 +16,7 @@ class GameStartOverlay extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                'images/chomashift_demon_logo.png', // 저장한 로고 경로
+                'images/chromashift_demon_logo.png', // 저장한 로고 경로
                 width: 500,
               ),
               const SizedBox(height: 32),
