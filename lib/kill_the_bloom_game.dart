@@ -25,8 +25,8 @@ class KillTheBloomGame extends FlameGame
   bool isVictory = false;
   int finalScore = 0;
 
-  // @override
-  // bool debugMode = true;
+  @override
+  bool debugMode = true;
 
   @override
   Color backgroundColor() => const Color.fromARGB(255, 64, 61, 61);
@@ -36,11 +36,11 @@ class KillTheBloomGame extends FlameGame
     world = World();
     camera = CameraComponent.withFixedResolution(
       width: 1280,
-      height: 620,
+      height: 720,
       world: world,
     );
 
-    background = BackgroundComponent(size: Vector2(1280, 620));
+    background = BackgroundComponent(size: Vector2(1280, 720));
 
     addAll([camera, world]);
     world.add(background);
@@ -107,9 +107,10 @@ class KillTheBloomGame extends FlameGame
 
     final randomType = available[random.nextInt(available.length)];
 
+    final centerY = size.y / 2;
     final position = Vector2(
       random.nextDouble() * 600,
-      random.nextDouble() * 300,
+      (centerY - 200) + random.nextDouble() * 400,
     );
 
     final changer = ElementChangerComponent(
