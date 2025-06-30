@@ -4,6 +4,12 @@ _A dark pixel-style elemental survival game built with Flutter + Flame_
 
 ---
 
+## 🔗 Play Now
+
+👉 [Play chromashift_demon on Firebase](https://chromashift-demon.firebaseapp.com/)
+
+---
+
 ## 🎮 Game Overview
 
 **chromashift_demon** is a fast-paced 2D survival action game where you battle against a powerful demon that shifts its elemental affinity over time. Your reflexes and element-matching skills are the key to victory.
@@ -54,6 +60,8 @@ _A dark pixel-style elemental survival game built with Flutter + Flame_
 ### ☠️ 3. Game Over / Victory Screen
 
 <img src="https://github.com/user-attachments/assets/5ead9747-cb51-429f-a34d-119a86ed08ea" width="800" />
+
+---
 
 ## 💬 Author
 
