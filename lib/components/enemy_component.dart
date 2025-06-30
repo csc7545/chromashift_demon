@@ -8,6 +8,7 @@ import 'package:kill_the_bloom/components/heart_bar_component.dart';
 import 'package:kill_the_bloom/enemy_state_type.dart';
 import 'package:kill_the_bloom/kill_the_bloom_game.dart';
 import 'package:kill_the_bloom/element_type.dart';
+import 'package:kill_the_bloom/player_state_type.dart';
 
 class EnemyComponent extends SpriteAnimationComponent
     with HasGameReference<KillTheBloomGame>, CollisionCallbacks {
@@ -48,6 +49,7 @@ class EnemyComponent extends SpriteAnimationComponent
         'demon/demon_attack.png',
         8,
         Vector2(81, 71),
+        loop: false,
       ),
       EnemyStateType.idle: await _loadAnimation(
         'demon/demon_idle.png',
@@ -89,12 +91,14 @@ class EnemyComponent extends SpriteAnimationComponent
     }
   }
 
+  // Charging
   void _startChargingPhase() async {
     currentState = EnemyStateType.charging;
     animation = animations[EnemyStateType.charging];
     add(TimerComponent(period: 5, onTick: _startActivePhase));
   }
 
+  // Color Active
   void _startActivePhase() {
     currentState = EnemyStateType.active;
     currentColor =
@@ -114,14 +118,20 @@ class EnemyComponent extends SpriteAnimationComponent
     add(TimerComponent(period: duration.toDouble(), onTick: _startIdlePhase));
   }
 
+  // Idle
   void _startIdlePhase() {
-    currentState = EnemyStateType.idle;
     children.whereType<ColorEffect>().forEach(remove);
 
-    animation = animations[EnemyStateType.idle]; // 날라다니는 상태
+    if (game.player.currentElement != currentColor) {
+      _maybeAttack(); // 바로 공격 상태로 전환
+      return;
+    }
 
-    // 조건 체크 후 공격 혹은 다음 충전
-    add(TimerComponent(period: 5, onTick: _maybeAttack));
+    currentState = EnemyStateType.idle;
+    animation = animations[EnemyStateType.idle];
+
+    // 움직임 감시 + 타이머 병렬 실행
+    _monitorPlayerMovementDuringIdle();
   }
 
   void _maybeAttack() {
@@ -129,6 +139,11 @@ class EnemyComponent extends SpriteAnimationComponent
     animation = animations[EnemyStateType.attacking];
     hasFired = false;
     lastFrameIndex = -1;
+
+    animationTicker?.onComplete = () {
+      animation = animations[EnemyStateType.idle];
+    };
+    add(TimerComponent(period: 5, onTick: _startChargingPhase));
   }
 
   void _fireBulletOnce() {
@@ -137,6 +152,26 @@ class EnemyComponent extends SpriteAnimationComponent
 
     final bullet = EnemyBulletComponent(startPosition: startPosition);
     game.world.add(bullet);
+  }
+
+  void _monitorPlayerMovementDuringIdle() {
+    children.whereType<ColorEffect>().forEach(remove);
+    final initialPosition = game.player.position.clone();
+
+    // 5초 내로 이동 감지되면 공격, 아니면 charging
+    add(
+      TimerComponent(
+        period: 5,
+        onTick: () {
+          if ((game.player.position - initialPosition).length > 2 ||
+              game.player.currentState == PlayerStateType.attack) {
+            _maybeAttack(); // 이동했으므로 공격
+          } else {
+            _startChargingPhase(); // 움직이지 않았으므로 charging
+          }
+        },
+      ),
+    );
   }
 
   Color _getColorFromElement(ElementType type) {
@@ -202,12 +237,13 @@ class EnemyComponent extends SpriteAnimationComponent
 
     animation = animations[EnemyStateType.hurt];
     animationTicker?.onComplete = () {
-      animation = animations[EnemyStateType.idle];
+      animation = animations[EnemyStateType.charging];
     };
   }
 
   void die() {
     if (isDead) return;
+    children.whereType<ColorEffect>().forEach(remove);
 
     currentState = EnemyStateType.death;
     isDead = true;
