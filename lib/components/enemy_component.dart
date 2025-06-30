@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
 import 'package:kill_the_bloom/components/enemy_bullet_component.dart';
+import 'package:kill_the_bloom/components/heart_bar_component.dart';
 import 'package:kill_the_bloom/enemy_state_type.dart';
 import 'package:kill_the_bloom/kill_the_bloom_game.dart';
 import 'package:kill_the_bloom/element_type.dart';
@@ -19,43 +20,52 @@ class EnemyComponent extends SpriteAnimationComponent
   ElementType? currentColor;
 
   EnemyComponent({super.position}) {
-    size = Vector2(256, 256);
+    size = Vector2(243, 213);
   }
 
   @override
   Future<void> onLoad() async {
+    final healthBar = HealthBarComponent(
+      maxHealth: 50,
+      currentHealth: 50,
+      heartSize: Vector2(16, 16),
+      heartsPerRow: 10,
+      position: Vector2(16, (-16 * 6)), // 머리 위에 표시
+    );
+
     animations = {
       EnemyStateType.charging: await _loadSingleFrameAnimation(
         path: 'demon/demon_hurt.png',
         frameIndex: 2, // 세 번째 프레임 (0부터 시작)
-        frameSize: Vector2(81, 81),
+        frameSize: Vector2(81, 71),
       ),
       EnemyStateType.attacking: await _loadAnimation(
         'demon/demon_attack.png',
         8,
-        Vector2(81, 81),
+        Vector2(81, 71),
       ),
       EnemyStateType.idle: await _loadAnimation(
         'demon/demon_idle.png',
         4,
-        Vector2(81, 81),
+        Vector2(81, 71),
       ),
       EnemyStateType.hurt: await _loadAnimation(
         'demon/demon_hurt.png',
         4,
-        Vector2(81, 81),
+        Vector2(81, 71),
         loop: false,
       ),
       EnemyStateType.death: await _loadAnimation(
         'demon/demon_death.png',
         7,
-        Vector2(81, 81),
+        Vector2(81, 71),
         loop: false,
       ),
     };
 
     _startChargingPhase();
     add(RectangleHitbox());
+    add(healthBar);
   }
 
   @override

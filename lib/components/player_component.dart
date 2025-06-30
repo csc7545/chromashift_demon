@@ -2,6 +2,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
 import 'package:kill_the_bloom/components/bullet_component.dart';
+import 'package:kill_the_bloom/components/heart_bar_component.dart';
 import 'package:kill_the_bloom/element_type.dart';
 import 'package:kill_the_bloom/kill_the_bloom_game.dart';
 import 'package:kill_the_bloom/player_state_type.dart';
@@ -23,6 +24,15 @@ class PlayerComponent extends SpriteAnimationComponent
     animation = animations[currentState]!;
 
     add(RectangleHitbox());
+
+    final healthBar = HealthBarComponent(
+      maxHealth: 3,
+      currentHealth: 1,
+      heartSize: Vector2(16, 16),
+      heartsPerRow: 3,
+      position: Vector2(0, -16), // 머리 위에 표시
+    );
+    add(healthBar);
   }
 
   @override
