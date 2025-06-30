@@ -26,7 +26,7 @@ class EnemyComponent extends SpriteAnimationComponent
   int currentHealth = 50;
 
   EnemyComponent({super.position}) {
-    size = Vector2(243, 213);
+    size = Vector2(324, 284);
   }
 
   @override
@@ -36,7 +36,7 @@ class EnemyComponent extends SpriteAnimationComponent
       currentHealth: currentHealth,
       heartSize: Vector2(16, 16),
       heartsPerRow: 10,
-      position: Vector2(16, (-16 * 6)), // 머리 위에 표시
+      position: Vector2(16 * 3, (-16 * 6)), // 머리 위에 표시
     );
 
     animations = {

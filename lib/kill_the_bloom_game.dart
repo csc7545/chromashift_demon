@@ -25,8 +25,8 @@ class KillTheBloomGame extends FlameGame
   bool isVictory = false;
   int finalScore = 0;
 
-  @override
-  bool debugMode = true;
+  // @override
+  // bool debugMode = true;
 
   @override
   Color backgroundColor() => const Color.fromARGB(255, 64, 61, 61);
@@ -66,7 +66,7 @@ class KillTheBloomGame extends FlameGame
     enemy =
         EnemyComponent()
           ..anchor = Anchor.center
-          ..position = Vector2(size.x / 2 + 300, size.y / 2); // 화면 오른쪽에 위치
+          ..position = Vector2(size.x / 2 + 400, size.y / 2 + 50); // 화면 오른쪽에 위치
 
     scoreHud = ScoreHudComponent();
 
