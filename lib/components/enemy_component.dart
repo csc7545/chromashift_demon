@@ -114,6 +114,7 @@ class EnemyComponent extends SpriteAnimationComponent
           duration: duration / 20,
           reverseDuration: duration / 20,
           infinite: true,
+          curve: Curves.easeOut,
         ),
         opacityTo: 0.8,
       ),
