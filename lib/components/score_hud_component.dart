@@ -18,6 +18,7 @@ class ScoreHudComponent extends TextComponent {
         color: RainbowColorUtil.getColor(0),
         fontSize: 24,
         fontWeight: FontWeight.bold,
+        letterSpacing: 1,
       ),
     );
   }
@@ -38,6 +39,7 @@ class ScoreHudComponent extends TextComponent {
         color: newColor,
         fontSize: 24,
         fontWeight: FontWeight.bold,
+        letterSpacing: 1,
       ),
     );
   }
