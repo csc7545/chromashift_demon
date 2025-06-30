@@ -8,7 +8,11 @@ _A dark pixel-style elemental survival game built with Flutter + Flame_
 
 <p align="center">
   <a href="https://chromashift-demon.firebaseapp.com/" target="_blank">
-    <img src="https://img.shields.io/badge/Play%20Now-chromashift__demon-red?style=for-the-badge&logo=google-chrome&logoColor=white" alt="Play chromashift_demon" />
+    <img
+      src="https://img.shields.io/badge/Play%20Now-chromashift__demon-red?style=for-the-badge&logo=google-chrome&logoColor=white"
+      alt="Play chromashift_demon"
+      width="1000"
+/>
   </a>
 </p>
 
@@ -22,11 +26,13 @@ _A dark pixel-style elemental survival game built with Flutter + Flame_
 
 ## 🧪 Technologies Used
 
-- **Language**: Dart
-- **Game Engine**: [Flame](https://flame-engine.org/) `v1.10+`
-- **UI Framework**: [Flutter](https://flutter.dev/) `3.22+`
-- **Rendering**: Canvas-based pixel-style visuals
-- **Platform Support**: Web, Desktop, and Mobile
+<p align="center">
+  <img src="https://img.shields.io/badge/Dart-2.19+-0175C2?style=for-the-badge&logo=dart&logoColor=white" />
+  <img src="https://img.shields.io/badge/Flutter-3.22+-02569B?style=for-the-badge&logo=flutter&logoColor=white" />
+  <img src="https://img.shields.io/badge/🔥 Flame-1.10+-F05340?style=for-the-badge&logoColor=white" />
+  <img src="https://img.shields.io/badge/Canvas%20Rendering-Pixel%20Art-9C27B0?style=for-the-badge&logo=material-design&logoColor=white" />
+  <img src="https://img.shields.io/badge/Platform-Web%20|%20Desktop%20|%20Mobile-FF6F00?style=for-the-badge&logo=devices&logoColor=white" />
+</p>
 
 ---
 
