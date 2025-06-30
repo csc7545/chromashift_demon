@@ -7,7 +7,7 @@ import 'package:kill_the_bloom/kill_the_bloom_game.dart';
 
 class EnemyBulletComponent extends SpriteComponent
     with HasGameReference<KillTheBloomGame>, CollisionCallbacks {
-  final double speed = 250;
+  final double speed = 100;
 
   EnemyBulletComponent({required Vector2 startPosition}) {
     size = Vector2(96, 64);
@@ -26,9 +26,9 @@ class EnemyBulletComponent extends SpriteComponent
   @override
   void update(double dt) {
     super.update(dt);
-    if (!game.player.isMounted) return;
+    if (!game.player!.isMounted) return;
 
-    final playerPos = game.player.position.clone();
+    final playerPos = game.player!.position.clone();
     final direction = (playerPos - position).normalized();
 
     // 실시간 유도

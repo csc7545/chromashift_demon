@@ -5,22 +5,28 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:kill_the_bloom/components/background_component.dart';
 import 'package:kill_the_bloom/components/element_changer_component.dart';
 import 'package:kill_the_bloom/components/enemy_component.dart';
 import 'package:kill_the_bloom/components/player_component.dart';
 import 'package:kill_the_bloom/components/score_hud_component.dart';
-import 'package:kill_the_bloom/components/world_border_component.dart';
 import 'package:kill_the_bloom/element_type.dart';
 
 class KillTheBloomGame extends FlameGame
     with HasCollisionDetection, HasKeyboardHandlerComponents {
-  late final PlayerComponent player;
-  late final EnemyComponent enemy;
-  late final WorldBorderComponent worldBorder;
-  late final ScoreHudComponent scoreHud;
+  PlayerComponent? player;
+  EnemyComponent? enemy;
+  ScoreHudComponent? scoreHud;
+  late final BackgroundComponent background;
 
-  @override
-  bool debugMode = true;
+  final Set<ElementType> spawnedTypes = {};
+  bool gameStarted = false;
+  bool gameOver = false;
+  bool isVictory = false;
+  int finalScore = 0;
+
+  // @override
+  // bool debugMode = true;
 
   @override
   Color backgroundColor() => const Color.fromARGB(255, 64, 61, 61);
@@ -34,6 +40,25 @@ class KillTheBloomGame extends FlameGame
       world: world,
     );
 
+    background = BackgroundComponent(size: Vector2(1280, 620));
+
+    addAll([camera, world]);
+    world.add(background);
+
+    camera.viewfinder.anchor = Anchor.topLeft;
+    camera.viewfinder.position = Vector2.zero();
+
+    overlays.add('GameStartOverlay');
+  }
+
+  void startGame() {
+    overlays.remove('GameStartOverlay');
+    gameStarted = true;
+    gameOver = false;
+    finalScore = 0;
+    resumeEngine();
+
+    // 게임 초기화 로직
     player =
         PlayerComponent()
           ..anchor = Anchor.center
@@ -43,43 +68,55 @@ class KillTheBloomGame extends FlameGame
           ..anchor = Anchor.center
           ..position = Vector2(size.x / 2 + 300, size.y / 2); // 화면 오른쪽에 위치
 
-    worldBorder = WorldBorderComponent(size: Vector2(1280, 620));
     scoreHud = ScoreHudComponent();
 
-    addAll([camera, world]);
-    world.add(player);
-    world.add(enemy);
-    world.add(worldBorder);
-    world.add(scoreHud);
-
-    camera.viewfinder.anchor = Anchor.topLeft;
-    // camera.follow(player);
+    world.add(player!);
+    world.add(enemy!);
+    world.add(scoreHud!);
 
     for (int i = 0; i < 3; i++) {
       spawnRandomElementChanger();
     }
   }
 
-  final Set<ElementType> spawnedTypes = {};
+  void endGame({required bool victory}) {
+    world.children
+        .where((c) => c != background)
+        .toList()
+        .forEach((c) => c.removeFromParent());
+
+    gameOver = true;
+    isVictory = victory;
+    finalScore = scoreHud!.score;
+    overlays.add('GameOverOverlay');
+  }
+
+  void resetGame() {
+    spawnedTypes.clear();
+
+    gameStarted = false;
+    gameOver = false;
+    isVictory = false;
+    finalScore = 0;
+  }
 
   void spawnRandomElementChanger() {
     final random = Random();
     final available =
         ElementType.values.where((e) => !spawnedTypes.contains(e)).toList();
-    if (available.isEmpty) return;
 
     final randomType = available[random.nextInt(available.length)];
 
     final position = Vector2(
-      random.nextDouble() * 700,
-      random.nextDouble() * 500,
+      random.nextDouble() * 600,
+      random.nextDouble() * 300,
     );
 
     final changer = ElementChangerComponent(
       type: randomType,
       position: position,
       onCollected: () {
-        scoreHud.increaseScore(100);
+        scoreHud?.increaseScore(100);
         spawnedTypes.remove(randomType);
         spawnRandomElementChanger();
       },

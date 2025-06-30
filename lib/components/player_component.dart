@@ -10,7 +10,7 @@ import 'package:kill_the_bloom/player_state_type.dart';
 class PlayerComponent extends SpriteAnimationComponent
     with KeyboardHandler, HasGameReference<KillTheBloomGame> {
   Vector2 velocity = Vector2.zero();
-  final double speed = 1000;
+  final double speed = 100;
   ElementType currentElement = ElementType.red;
   PlayerStateType currentState = PlayerStateType.idle;
   late Map<PlayerStateType, SpriteAnimation> animations;
@@ -199,6 +199,6 @@ class PlayerComponent extends SpriteAnimationComponent
 
     isDead = true;
     removeFromParent();
-    // TODO: 게임 오버 처리 (UI 표시나 상태 전환 등)
+    game.endGame(victory: false);
   }
 }

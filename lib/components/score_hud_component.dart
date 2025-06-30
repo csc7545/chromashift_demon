@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kill_the_bloom/utils/rainbow_color_util.dart'; // 유틸 import
 
 class ScoreHudComponent extends TextComponent {
@@ -14,11 +14,9 @@ class ScoreHudComponent extends TextComponent {
         priority: 100,
       ) {
     textRenderer = TextPaint(
-      style: TextStyle(
+      style: GoogleFonts.pressStart2p(
         color: RainbowColorUtil.getColor(0),
         fontSize: 24,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 1,
       ),
     );
   }
@@ -35,12 +33,7 @@ class ScoreHudComponent extends TextComponent {
 
     final newColor = RainbowColorUtil.getColor(time * 2);
     textRenderer = TextPaint(
-      style: TextStyle(
-        color: newColor,
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 1,
-      ),
+      style: GoogleFonts.pressStart2p(color: newColor, fontSize: 24),
     );
   }
 }

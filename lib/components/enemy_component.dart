@@ -127,7 +127,7 @@ class EnemyComponent extends SpriteAnimationComponent
   void _startIdlePhase() {
     children.whereType<ColorEffect>().forEach(remove);
 
-    if (game.player.currentElement != currentColor) {
+    if (game.player!.currentElement != currentColor) {
       _maybeAttack(); // 바로 공격 상태로 전환
       return;
     }
@@ -161,15 +161,15 @@ class EnemyComponent extends SpriteAnimationComponent
 
   void _monitorPlayerMovementDuringIdle() {
     children.whereType<ColorEffect>().forEach(remove);
-    final initialPosition = game.player.position.clone();
+    final initialPosition = game.player!.position.clone();
 
     // 5초 내로 이동 감지되면 공격, 아니면 charging
     add(
       TimerComponent(
         period: 5,
         onTick: () {
-          if ((game.player.position - initialPosition).length > 2 ||
-              game.player.currentState == PlayerStateType.attack) {
+          if ((game.player!.position - initialPosition).length > 2 ||
+              game.player!.currentState == PlayerStateType.attack) {
             _maybeAttack(); // 이동했으므로 공격
           } else {
             _startChargingPhase(); // 움직이지 않았으므로 charging
@@ -255,6 +255,7 @@ class EnemyComponent extends SpriteAnimationComponent
     animation = animations[EnemyStateType.death];
     animationTicker?.onComplete = () {
       removeFromParent();
+      game.endGame(victory: true);
     };
   }
 }
