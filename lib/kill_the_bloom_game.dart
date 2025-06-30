@@ -15,6 +15,10 @@ class KillTheBloomGame extends FlameGame
     with HasCollisionDetection, HasKeyboardHandlerComponents {
   late final PlayerComponent player;
   late final EnemyComponent enemy;
+  late final WorldBorderComponent worldBorder;
+
+  @override
+  bool debugMode = true;
 
   @override
   Color backgroundColor() => const Color.fromARGB(255, 64, 61, 61);
@@ -27,15 +31,25 @@ class KillTheBloomGame extends FlameGame
       height: 620,
       world: world,
     );
-    camera.viewfinder.anchor = Anchor.topLeft;
+
+    player =
+        PlayerComponent()
+          ..anchor = Anchor.center
+          ..position = Vector2(size.x / 2 - 300, size.y / 2); // 화면 왼쪽에 위치
+    enemy =
+        EnemyComponent()
+          ..anchor = Anchor.center
+          ..position = Vector2(size.x / 2 + 300, size.y / 2); // 화면 오른쪽에 위치
+
+    worldBorder = WorldBorderComponent(size: Vector2(1280, 620));
+
     addAll([camera, world]);
-
-    player = PlayerComponent()..position = Vector2(size.x - 1000, size.y / 2);
-    enemy = EnemyComponent(position: Vector2(size.x - 256, size.y / 2));
-
     world.add(player);
     world.add(enemy);
-    world.add(WorldBorderComponent(size: Vector2(1280, 620)));
+    world.add(worldBorder);
+
+    camera.viewfinder.anchor = Anchor.topLeft;
+    // camera.follow(player);
 
     for (int i = 0; i < 3; i++) {
       spawnRandomElementChanger();
@@ -54,7 +68,7 @@ class KillTheBloomGame extends FlameGame
 
     final position = Vector2(
       random.nextDouble() * 640,
-      random.nextDouble() * 360,
+      random.nextDouble() * 620,
     );
 
     final changer = ElementChangerComponent(

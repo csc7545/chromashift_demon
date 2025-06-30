@@ -20,7 +20,6 @@ class PlayerComponent extends SpriteAnimationComponent
   Future<void> onLoad() async {
     await _loadAnimations(currentElement);
     size = Vector2(48, 48);
-    anchor = Anchor.center;
     animation = animations[currentState]!;
 
     add(RectangleHitbox());
@@ -31,8 +30,10 @@ class PlayerComponent extends SpriteAnimationComponent
     position += velocity * speed * dt;
 
     // 화면 밖 못 나가게 제한
-    final min = Vector2(size.x / 2, size.y / 2); // 좌상
-    final max = Vector2(1280 - size.x / 2, 620 - size.y / 2); // 우하
+    // Anchor.center 기준의 clamp
+    final halfSize = size / 2;
+    final min = Vector2(0 + halfSize.x, 0 + halfSize.y);
+    final max = Vector2(game.size.x - halfSize.x, game.size.y - halfSize.y);
     position.clamp(min, max);
 
     if (animation != null &&

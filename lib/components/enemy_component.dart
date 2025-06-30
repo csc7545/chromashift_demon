@@ -3,6 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
+import 'package:kill_the_bloom/components/enemy_bullet_component.dart';
 import 'package:kill_the_bloom/enemy_state_type.dart';
 import 'package:kill_the_bloom/kill_the_bloom_game.dart';
 import 'package:kill_the_bloom/element_type.dart';
@@ -13,11 +14,12 @@ class EnemyComponent extends SpriteAnimationComponent
   late final Map<EnemyStateType, SpriteAnimation> animations;
 
   bool isDead = false;
+  bool hasFired = false;
+  int lastFrameIndex = -1;
   ElementType? currentColor;
 
   EnemyComponent({super.position}) {
     size = Vector2(256, 256);
-    anchor = Anchor.center;
   }
 
   @override
@@ -56,6 +58,22 @@ class EnemyComponent extends SpriteAnimationComponent
     add(RectangleHitbox());
   }
 
+  @override
+  void update(double dt) {
+    super.update(dt);
+
+    if (currentState == EnemyStateType.attacking && animationTicker != null) {
+      final currentFrameIndex = animationTicker!.currentIndex;
+
+      if (currentFrameIndex == 3 && !hasFired) {
+        _fireBulletOnce();
+        hasFired = true;
+      }
+
+      lastFrameIndex = currentFrameIndex;
+    }
+  }
+
   void _startChargingPhase() async {
     currentState = EnemyStateType.charging;
     animation = animations[EnemyStateType.charging];
@@ -64,11 +82,9 @@ class EnemyComponent extends SpriteAnimationComponent
 
   void _startActivePhase() {
     currentState = EnemyStateType.active;
-    // 랜덤 컬러 선택
     currentColor =
         ElementType.values[Random().nextInt(ElementType.values.length)];
 
-    // 기존 이펙트 제거 후 컬러 이펙트 추가
     children.whereType<ColorEffect>().forEach(remove);
     add(
       ColorEffect(
@@ -95,10 +111,17 @@ class EnemyComponent extends SpriteAnimationComponent
 
   void _maybeAttack() {
     currentState = EnemyStateType.attacking;
-    // TODO: 플레이어 움직였는지 / 못 맞췄는지 체크해서 공격할지 결정
     animation = animations[EnemyStateType.attacking];
+    hasFired = false;
+    lastFrameIndex = -1;
+  }
 
-    // 일단 상태만 전환, 이후 발사체 로직 추가 예정
+  void _fireBulletOnce() {
+    final mouthOffset = Vector2(-50, 20);
+    final startPosition = position + mouthOffset;
+
+    final bullet = EnemyBulletComponent(startPosition: startPosition);
+    game.world.add(bullet);
   }
 
   Color _getColorFromElement(ElementType type) {
