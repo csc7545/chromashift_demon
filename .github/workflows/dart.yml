@@ -28,7 +28,7 @@ jobs:
         run: fvm flutter build web --wasm
 
       - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@v12
+        uses: w9jds/firebase-action@v14.9.0
         with:
           args: deploy --only hosting
         env:
