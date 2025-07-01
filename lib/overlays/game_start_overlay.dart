@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class GameStartOverlay extends StatelessWidget {
-  final KillTheBloomGame game;
+  final ChromaShiftDemonGame game;
 
   const GameStartOverlay({super.key, required this.game});
 
@@ -16,7 +16,7 @@ class GameStartOverlay extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(
-                'images/chromashift_demon_logo.png', // 저장한 로고 경로
+                'assets/images/chromashift_demon_logo.png',
                 width: 500,
               ),
               const SizedBox(height: 32),

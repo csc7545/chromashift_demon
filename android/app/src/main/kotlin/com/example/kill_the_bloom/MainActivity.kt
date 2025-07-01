@@ -1,4 +1,4 @@
-package com.example.kill_the_bloom
+package com.example.chromashift_demon
 
 import io.flutter.embedding.android.FlutterActivity
 

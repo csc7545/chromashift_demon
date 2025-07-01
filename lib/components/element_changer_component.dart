@@ -1,11 +1,11 @@
 import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
-import 'package:kill_the_bloom/components/player_component.dart';
-import 'package:kill_the_bloom/element_type.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
+import 'package:chromashift_demon/components/player_component.dart';
+import 'package:chromashift_demon/element_type.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class ElementChangerComponent extends SpriteAnimationComponent
-    with CollisionCallbacks, HasGameReference<KillTheBloomGame> {
+    with CollisionCallbacks, HasGameReference<ChromaShiftDemonGame> {
   final ElementType type;
   final void Function()? onCollected;
 

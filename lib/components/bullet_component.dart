@@ -1,11 +1,11 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:kill_the_bloom/components/enemy_component.dart';
-import 'package:kill_the_bloom/element_type.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
+import 'package:chromashift_demon/components/enemy_component.dart';
+import 'package:chromashift_demon/element_type.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class BulletComponent extends SpriteAnimationComponent
-    with HasGameReference<KillTheBloomGame>, CollisionCallbacks {
+    with HasGameReference<ChromaShiftDemonGame>, CollisionCallbacks {
   final ElementType type;
   final Vector2 direction;
   final double speed = 300;

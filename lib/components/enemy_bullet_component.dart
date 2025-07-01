@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
-import 'package:kill_the_bloom/components/player_component.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
+import 'package:chromashift_demon/components/player_component.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class EnemyBulletComponent extends SpriteComponent
-    with HasGameReference<KillTheBloomGame>, CollisionCallbacks {
+    with HasGameReference<ChromaShiftDemonGame>, CollisionCallbacks {
   final double speed = 100;
 
   EnemyBulletComponent({required Vector2 startPosition}) {

@@ -1,6 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kill_the_bloom/utils/rainbow_color_util.dart'; // 유틸 import
+import 'package:chromashift_demon/utils/rainbow_color_util.dart'; // 유틸 import
 
 class ScoreHudComponent extends TextComponent {
   int score = 0;

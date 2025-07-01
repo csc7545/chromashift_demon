@@ -1,14 +1,14 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
-import 'package:kill_the_bloom/components/bullet_component.dart';
-import 'package:kill_the_bloom/components/heart_bar_component.dart';
-import 'package:kill_the_bloom/element_type.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
-import 'package:kill_the_bloom/player_state_type.dart';
+import 'package:chromashift_demon/components/bullet_component.dart';
+import 'package:chromashift_demon/components/heart_bar_component.dart';
+import 'package:chromashift_demon/element_type.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
+import 'package:chromashift_demon/player_state_type.dart';
 
 class PlayerComponent extends SpriteAnimationComponent
-    with KeyboardHandler, HasGameReference<KillTheBloomGame> {
+    with KeyboardHandler, HasGameReference<ChromaShiftDemonGame> {
   Vector2 velocity = Vector2.zero();
   final double speed = 100;
   ElementType currentElement = ElementType.red;

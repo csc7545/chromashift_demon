@@ -1,9 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:flame/extensions.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class HealthBarComponent extends PositionComponent
-    with HasGameReference<KillTheBloomGame> {
+    with HasGameReference<ChromaShiftDemonGame> {
   final int maxHealth;
   int currentHealth;
   final Vector2 heartSize;

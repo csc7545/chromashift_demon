@@ -1,19 +1,20 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
-import 'package:kill_the_bloom/overlays/game_over_overlay.dart';
-import 'package:kill_the_bloom/overlays/game_start_overlay.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
+import 'package:chromashift_demon/overlays/game_over_overlay.dart';
+import 'package:chromashift_demon/overlays/game_start_overlay.dart';
 
 void main() {
   runApp(
     GameWidget(
-      game: KillTheBloomGame(),
+      game: ChromaShiftDemonGame(),
       overlayBuilderMap: {
         'GameStartOverlay':
-            (context, game) => GameStartOverlay(game: game as KillTheBloomGame),
+            (context, game) =>
+                GameStartOverlay(game: game as ChromaShiftDemonGame),
         'GameOverOverlay':
             (context, game) => GameOverOverlay(
-              game: game as KillTheBloomGame,
+              game: game as ChromaShiftDemonGame,
               isVictory: game.isVictory,
               score: game.finalScore,
             ),

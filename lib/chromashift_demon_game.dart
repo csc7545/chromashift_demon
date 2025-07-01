@@ -5,14 +5,14 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
-import 'package:kill_the_bloom/components/background_component.dart';
-import 'package:kill_the_bloom/components/element_changer_component.dart';
-import 'package:kill_the_bloom/components/enemy_component.dart';
-import 'package:kill_the_bloom/components/player_component.dart';
-import 'package:kill_the_bloom/components/score_hud_component.dart';
-import 'package:kill_the_bloom/element_type.dart';
+import 'package:chromashift_demon/components/background_component.dart';
+import 'package:chromashift_demon/components/element_changer_component.dart';
+import 'package:chromashift_demon/components/enemy_component.dart';
+import 'package:chromashift_demon/components/player_component.dart';
+import 'package:chromashift_demon/components/score_hud_component.dart';
+import 'package:chromashift_demon/element_type.dart';
 
-class KillTheBloomGame extends FlameGame
+class ChromaShiftDemonGame extends FlameGame
     with HasCollisionDetection, HasKeyboardHandlerComponents {
   PlayerComponent? player;
   EnemyComponent? enemy;

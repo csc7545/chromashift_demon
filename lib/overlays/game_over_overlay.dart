@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class GameOverOverlay extends StatelessWidget {
-  final KillTheBloomGame game;
+  final ChromaShiftDemonGame game;
   final bool isVictory;
   final int score;
 

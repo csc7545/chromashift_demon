@@ -3,15 +3,15 @@ import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
-import 'package:kill_the_bloom/components/enemy_bullet_component.dart';
-import 'package:kill_the_bloom/components/heart_bar_component.dart';
-import 'package:kill_the_bloom/enemy_state_type.dart';
-import 'package:kill_the_bloom/kill_the_bloom_game.dart';
-import 'package:kill_the_bloom/element_type.dart';
-import 'package:kill_the_bloom/player_state_type.dart';
+import 'package:chromashift_demon/components/enemy_bullet_component.dart';
+import 'package:chromashift_demon/components/heart_bar_component.dart';
+import 'package:chromashift_demon/enemy_state_type.dart';
+import 'package:chromashift_demon/chromashift_demon_game.dart';
+import 'package:chromashift_demon/element_type.dart';
+import 'package:chromashift_demon/player_state_type.dart';
 
 class EnemyComponent extends SpriteAnimationComponent
-    with HasGameReference<KillTheBloomGame>, CollisionCallbacks {
+    with HasGameReference<ChromaShiftDemonGame>, CollisionCallbacks {
   EnemyStateType currentState = EnemyStateType.idle;
   late final Map<EnemyStateType, SpriteAnimation> animations;
 
