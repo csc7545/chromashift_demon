@@ -1,0 +1,35 @@
+name: Flutter Web Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter using FVM
+        uses: kuhnroyal/flutter-fvm-config-action@v1
+
+      - name: Install dependencies
+        run: fvm flutter pub get
+
+      - name: Apply Dart fixes
+        run: fvm dart fix --apply
+
+      - name: Analyze source
+        run: fvm dart analyze
+
+      - name: Build Flutter Web (Wasm)
+        run: fvm flutter build web --wasm
+
+      - name: Deploy to Firebase Hosting
+        uses: w9jds/firebase-action@v13
+        with:
+          args: deploy --only hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
