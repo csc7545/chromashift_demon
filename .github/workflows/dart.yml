@@ -2,7 +2,7 @@ name: Flutter Web Deploy
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build-and-deploy:
@@ -28,7 +28,7 @@ jobs:
         run: fvm flutter build web --wasm
 
       - name: Deploy to Firebase Hosting
-        uses: w9jds/firebase-action@v13
+        uses: w9jds/firebase-action@v12
         with:
           args: deploy --only hosting
         env:
