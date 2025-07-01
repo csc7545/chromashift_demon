@@ -3,12 +3,12 @@ import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/effects.dart';
 import 'package:flutter/material.dart';
-import 'package:chromashift_demon/components/enemy_bullet_component.dart';
-import 'package:chromashift_demon/components/heart_bar_component.dart';
-import 'package:chromashift_demon/enemy_state_type.dart';
+import 'package:chromashift_demon/components/enemy/enemy_bullet_component.dart';
+import 'package:chromashift_demon/components/ui/heart_bar_component.dart';
+import 'package:chromashift_demon/core/enemy_state_type.dart';
 import 'package:chromashift_demon/chromashift_demon_game.dart';
-import 'package:chromashift_demon/element_type.dart';
-import 'package:chromashift_demon/player_state_type.dart';
+import 'package:chromashift_demon/core/element_type.dart';
+import 'package:chromashift_demon/core/player_state_type.dart';
 
 class EnemyComponent extends SpriteAnimationComponent
     with HasGameReference<ChromaShiftDemonGame>, CollisionCallbacks {

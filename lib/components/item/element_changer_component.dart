@@ -1,7 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
-import 'package:chromashift_demon/components/player_component.dart';
-import 'package:chromashift_demon/element_type.dart';
+import 'package:chromashift_demon/components/player/player_component.dart';
+import 'package:chromashift_demon/core/element_type.dart';
 import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class ElementChangerComponent extends SpriteAnimationComponent

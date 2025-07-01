@@ -1,11 +1,11 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/services.dart';
-import 'package:chromashift_demon/components/bullet_component.dart';
-import 'package:chromashift_demon/components/heart_bar_component.dart';
-import 'package:chromashift_demon/element_type.dart';
+import 'package:chromashift_demon/components/player/bullet_component.dart';
+import 'package:chromashift_demon/components/ui/heart_bar_component.dart';
+import 'package:chromashift_demon/core/element_type.dart';
 import 'package:chromashift_demon/chromashift_demon_game.dart';
-import 'package:chromashift_demon/player_state_type.dart';
+import 'package:chromashift_demon/core/player_state_type.dart';
 
 class PlayerComponent extends SpriteAnimationComponent
     with KeyboardHandler, HasGameReference<ChromaShiftDemonGame> {

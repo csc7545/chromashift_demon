@@ -1,7 +1,7 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:chromashift_demon/components/enemy_component.dart';
-import 'package:chromashift_demon/element_type.dart';
+import 'package:chromashift_demon/components/enemy/enemy_component.dart';
+import 'package:chromashift_demon/core/element_type.dart';
 import 'package:chromashift_demon/chromashift_demon_game.dart';
 
 class BulletComponent extends SpriteAnimationComponent
