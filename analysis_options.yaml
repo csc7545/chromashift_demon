@@ -1,28 +1,36 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
-
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
 
 linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    avoid_print: true
+    avoid_empty_else: true
+    empty_statements: true
+    # Switch문 중복되는 분기 warning
+    no_duplicate_case_values: true
+    # future아닌 곳에 await 막기
+    await_only_futures: true
+    camel_case_types: true
+    constant_identifier_names: true
+    curly_braces_in_flow_control_structures: true
+    # 예외처리에서 catch state 비어있거나 exception 처리 안해주는지 확인
+    empty_catches: true
+    empty_constructor_bodies: true
+    file_names: true
+    # 해당 brace안에서만 사용되는 indetifiers는 무조건 private으로 사용
+    no_leading_underscores_for_local_identifiers: true
+    # 식별자를 lowercamelcase로만
+    non_constant_identifier_names: true
+    prefer_conditional_assignment: true
+    # indexof 대신에  contains쓰도록 경고
+    prefer_contains: true
+    #=! null 등을  ?? operator로 바꿀 수 있도록
+    prefer_if_null_operators: true
+    # ().length ==1 대신에 isEmpty 사용하도록
+    prefer_is_empty: true
+    # new와 같이 불필요한 키워드 사용안하도록
+    unnecessary_constructor_name: true
+    prefer_single_quotes: true
 
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+dart_code_metrics:
+  extends:
+    - recommended
