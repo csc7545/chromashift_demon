@@ -12,21 +12,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Flutter using FVM
-        uses: kuhnroyal/flutter-fvm-config-action@v1
+      # 1. FVM CLI 설치
+      - name: Install FVM CLI
+        run: dart pub global activate fvm
 
+      # 2. FVM 설정 읽고 Flutter SDK 설치 및 활성화
+      - name: Setup Flutter SDK via FVM
+        run: |
+          fvm install
+          fvm use
+      - name: Confirm Flutter version
+        run: fvm flutter --version
+
+      # 3. dependencies 설치
       - name: Install dependencies
         run: fvm flutter pub get
 
+      # 4. Dart 자동 수정
       - name: Apply Dart fixes
         run: fvm dart fix --apply
 
+      # 5. 정적 분석
       - name: Analyze source
         run: fvm dart analyze
 
+      # 6. Web WASM 빌드
       - name: Build Flutter Web (Wasm)
         run: fvm flutter build web --wasm
 
+      # 7. Firebase Hosting 배포
       - name: Deploy to Firebase Hosting
         uses: w9jds/firebase-action@v14.9.0
         with:
